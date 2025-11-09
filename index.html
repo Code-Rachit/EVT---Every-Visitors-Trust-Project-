@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EVT - Every Visitor's Trust</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-left">
+      <a href="#home" class="logo-link">
+        <img src="evt-logo.png" alt="EVT Logo" class="logo-img" />
+      </a>
+    </div>
+
+    <div class="nav-center">
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search products, categories..." class="search-input" />
+        <button class="search-btn" onclick="searchProducts()"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="#home"><i class="fas fa-home"></i> Home</a>
+      <a href="#categories"><i class="fas fa-th-large"></i> Categories</a>
+      <a href="#products"><i class="fas fa-box"></i> Products</a>
+      <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+
+    <div class="nav-right">
+      <button class="cart-btn" onclick="toggleCart()">
+  <i class="fa fa-shopping-cart"></i>
+  <span id="cartCount" class="cart-count">0</span>
+</button>
+
+      <button class="login-btn" id="loginBtn" onclick="openModal()">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <h1>Every Visitor's Trust</h1>
+    <div class="trust-badge">
+  <i class="fas fa-certificate"></i>
+  <span><strong>EVT Verified & Certified Platform — Trusted by Thousands!</strong></span>
+</div>
+    <p>Empowering Startups, Building Trust, Connecting Communities</p>
+    <div class="trust-badge">
+      <i class="fas fa-shield-check"></i>
+      <span><strong>100% Verified</strong> Products & Sellers</span>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories" id="categories">
+    <h2>Shop By Category</h2>
+    <div class="category-grid">
+      <div class="category-card" onclick="filterByCategory('fashion')"><i class="fas fa-tshirt"></i><h3>Fashion</h3></div>
+      <div class="category-card" onclick="filterByCategory('electronics')"><i class="fas fa-laptop"></i><h3>Electronics</h3></div>
+      <div class="category-card" onclick="filterByCategory('kitchen')"><i class="fas fa-utensils"></i><h3>Kitchen</h3></div>
+      <div class="category-card" onclick="filterByCategory('home')"><i class="fas fa-home"></i><h3>Home & Living</h3></div>
+      <div class="category-card" onclick="filterByCategory('beauty')"><i class="fas fa-spa"></i><h3>Beauty</h3></div>
+      <div class="category-card" onclick="filterByCategory('sports')"><i class="fas fa-football-ball"></i><h3>Sports</h3></div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <!-- Products Section -->
+<section class="products-section" id="products">
+  <div class="products-header">
+  <h2>Our Products</h2>
+   <div class="filter-controls">
+      <label for="sortSelect" class="sort-label">
+        <i class="fas fa-sort-amount-down"></i> Sort By:
+      </label>
+  <select id="sortSelect" onchange="sortProducts(this.value)">
+                <option value="">Sort By</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Rating</option>
+                <option value="newest">Newest First</option>
+            </select>
+            </div>
+            </div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <img src="images/jacket.jpg" alt="Men’s Jacket" class="product-img">
+      <h3>Men’s Jacket</h3>
+      <p>₹1299</p>
+      <button onclick="addToCart('Men’s Jacket', 1299, 'images/jacket.jpg')">Add to Cart</button>
+      <button onclick="openDetails('Men’s Jacket', 'Stylish and warm winter jacket made of premium fabric.', 'images/jacket.jpg')">View Details</button>
+    </div>
+
+    <div class="product-card">
+      <img src="images/phone.jpg" alt="Smartphone X" class="product-img">
+      <h3>Smartphone X</h3>
+      <p>₹49999</p>
+      <button onclick="addToCart('Smartphone X', 24999, 'images/phone.jpg')">Add to Cart</button>
+      <button onclick="openDetails('Smartphone X', 'Latest smartphone with AI-powered camera and 5G.', 'images/phone.jpg')">View Details</button>
+    </div>
+
+    <div class="product-card">
+      <img src="images/mixer.jpg" alt="Mixer Grinder" class="product-img">
+      <h3>Mixer Grinder Pro</h3>
+      <p>₹2499</p>
+      <button onclick="addToCart('Mixer Grinder Pro', 2999, 'images/mixer.jpg')">Add to Cart</button>
+      <button onclick="openDetails('Mixer Grinder Pro', 'Powerful 3-jar mixer grinder for your kitchen.', 'images/mixer.jpg')">View Details</button>
+    </div>
+
+    <div class="product-card">
+      <img src="images/furniture.jpg" alt="Wooden Furniture" class="product-img">
+      <h3>Wooden Furniture</h3>
+      <p>₹5999</p>
+      <button onclick="addToCart('Wooden Furniture', 4999, 'images/funiture.jpg')">Add to Cart</button>
+      <button onclick="openDetails('Wooden Furniture', 'Premium oakwood furniture set for your home.', 'images/furniture.jpg')">View Details</button>
+    </div>
+
+    <div class="product-card">
+      <img src="images/cream.jpg" alt="Glow Face Cream" class="product-img">
+      <h3>Glow Face Cream</h3>
+      <p>₹799</p>
+      <button onclick="addToCart('Glow Face Cream', 799, 'images/cream.jpg')">Add to Cart</button>
+      <button onclick="openDetails('Glow Face Cream', 'Natural glowing face cream with Vitamin E.', 'images/cream.jpg')">View Details</button>
+    </div>
+
+    <div class="product-card">
+      <img src="images/ball.jpg" alt="Pro Football" class="product-img">
+      <h3>Pro Football</h3>
+      <p>₹999</p>
+      <button onclick="addToCart('Pro Football', 499, 'images/ball.jpg')">Add to Cart</button>
+      <button onclick="openDetails('Pro Football', 'Durable football of official size and weight.', 'images/ball.jpg')">View Details</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- Cart Modal -->
+<div id="cartModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeCart()">&times;</span>
+    <h2>Your Cart</h2>
+    <div id="cartItems"></div>
+    <p id="cartTotal" style="margin-top:1rem; font-weight:bold;">Total: ₹0</p>
+    <button onclick="checkout()">Checkout</button>
+  </div>
+</div>
+
+<!-- Product Details Modal -->
+<div id="detailsModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeDetails()">&times;</span>
+    <img id="modalImage" src="" alt="Product Image" class="modal-img">
+    <h2 id="modalTitle"></h2>
+    <p id="modalDesc"></p>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div id="checkoutModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeCheckout()">&times;</span>
+    <h2>Checkout</h2>
+    <p id="checkoutSummary"></p>
+    <button onclick="confirmOrder()">Confirm Order</button>
+  </div>
+</div>
+
+<!-- Product Popup Modal -->
+<div id="detailsModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeDetails()">&times;</span>
+    <img id="modalImage" src="" alt="Product Image" class="modal-img">
+    <h2 id="modalTitle"></h2>
+    <p id="modalDesc"></p>
+  </div>
+</div>
+
+
+  <!-- Checkout Popup -->
+<div class="modal" id="checkoutModal">
+  <div class="modal-content checkout-modal-content">
+    <span class="close-btn" onclick="closeCheckout()">&times;</span>
+    <h2>Checkout</h2>
+    <div id="checkoutDetails"></div>
+    <button class="submit-btn" onclick="confirmOrder()">Confirm Order</button>
+  </div>
+</div>
+
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <h2>Why Choose EVT?</h2>
+    <div class="feature-grid">
+      <div class="feature-card"><i class="fas fa-lock"></i><h3>Secure Payments</h3><p>End-to-end encrypted transactions</p></div>
+      <div class="feature-card"><i class="fas fa-badge-check"></i><h3>Verified Products</h3><p>All sellers verified before listing</p></div>
+      <div class="feature-card"><i class="fas fa-dollar-sign"></i><h3>Low Costs</h3><p>Optimized operations for affordable prices</p></div>
+      <div class="feature-card"><i class="fas fa-map-marker-alt"></i><h3>Local Support</h3><p>Empowering local entrepreneurs</p></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2>Get In Touch | <a href="https://forms.gle/Y9Se53e9XvZDrwZ98" target="_blank" class="help-link">Write Us</a></h2>
+
+    <div class="contact-grid">
+      <div class="contact-card"><i class="fas fa-envelope"></i><h3>Email</h3><p>support@evt.com</p></div>
+      <div class="contact-card"><i class="fas fa-phone"></i><h3>Phone</h3><p>+91-1234567890</p></div>
+      <div class="contact-card"><i class="fas fa-map-marker-alt"></i><h3>Location</h3><p>IMS Engineering College, Ghaziabad</p></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section"><h3>About EVT</h3><a href="#" onclick="openStory()">Our Story</a><a href="#" onclick="openCareers()">Careers</a></div>
+      <div class="footer-section"><h3>Support</h3><a href="https://forms.gle/Y9Se53e9XvZDrwZ98" >Help Center</a><a href="#" onclick="openSafety()">Safety & Trust</a></div>
+      <div class="footer-section"><h3>Sell With Us</h3><a href="#" onclick="openSeller()">Become a Seller</a></div>
+    </div>
+
+  </footer>
+
+  <!-- Login Modal -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Welcome Back!</h2>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group"><label>Email</label><input type="email" id="email" required /></div>
+        <div class="form-group"><label>Password</label><input type="password" id="password" required /></div>
+        <button type="submit" class="submit-btn">Login</button>
+        <p>Demo Accounts:<br>admin@evt.com / admin123<br>user@evt.com / user123</p>
+      </form>
+    </div>
+  </div>
+
+  
+  <!-- Cart Sidebar -->
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="close-cart-btn" onclick="toggleCart()">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Total:</span><span id="cartTotal">₹0</span></div>
+      <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+  </div>
+
+
+  <!-- Product Detail Popup -->
+<div class="modal" id="productModal">
+  <div class="modal-content product-modal-content">
+    <span class="close-btn" onclick="closeProductModal()">&times;</span>
+    <div class="product-detail">
+      <img id="modalProductImage" src="" alt="Product Image" class="modal-product-img">
+      <h2 id="modalProductName"></h2>
+      <p id="modalProductDesc"></p>
+      <p class="modal-product-price" id="modalProductPrice"></p>
+      <button class="add-to-cart-btn" id="modalAddToCart">Add to Cart</button>
+<button class="view-details-btn" id="modalBuyNow">Buy Now</button>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Our Story Modal -->
+<div class="modal" id="storyModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeStory()">&times;</span>
+    <h2>Our Story — Team EVT</h2>
+    <p>
+      EVT (Every Visitor’s Trust) was built with teamwork, dedication, and a passion for innovation. 
+      As the Team Lead, I coordinated members in design, logic, and testing to ensure a smooth 
+      collaboration across all modules. Our collective effort transformed an idea into a full-fledged 
+      e-commerce ecosystem for learners and creators alike.
+    </p>
+  </div>
+</div>
+
+<!-- Career Modal -->
+<div class="modal" id="careerModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeCareers()">&times;</span>
+    <h2>Careers at EVT</h2>
+    <p>Currently, there are no active vacancies. Please keep visiting this space for more updates.</p>
+  </div>
+</div>
+
+<!-- Seller Modal -->
+<div class="modal" id="sellerModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeSeller()">&times;</span>
+    <h2>Become a Seller</h2>
+    <p>Stay tuned! We’ll notify you as soon as seller registration opens on EVT.</p>
+  </div>
+</div>
+
+<!-- Safety & Trust Modal -->
+<div class="modal" id="safetyModal">
+  <div class="modal-content safety-modal-content">
+    <span class="close-btn" onclick="closeSafety()">&times;</span>
+    <h2 class="trust-title">🔰 Certified & Trusted Platform</h2>
+    <p class="trust-intro">
+      EVT — Every Visitor’s Trust — is built on authenticity, transparency, and technology-driven assurance.
+      Here’s why millions of visitors can rely on us:
+    </p>
+    <ul class="trust-points">
+      <li><i class="fas fa-shield-alt"></i> <strong>Verified Sellers & Products</strong> — every listing is manually verified before approval.</li>
+      <li><i class="fas fa-lock"></i> <strong>Secure Transactions</strong> — 256-bit encryption protects every payment.</li>
+      <li><i class="fas fa-id-badge"></i> <strong>Authentic User Profiles</strong> — KYC-verified accounts ensure real interactions.</li>
+      <li><i class="fas fa-certificate"></i> <strong>Certified Quality</strong> — products carry EVT Quality Mark certified by our audit team.</li>
+      <li><i class="fas fa-hand-holding-heart"></i> <strong>Community Trust Score</strong> — products gain visibility based on buyer feedback.</li>
+      <li><i class="fas fa-globe"></i> <strong>Global Compliance</strong> — follows GDPR & Indian E-Commerce Regulations 2025.</li>
+      <li><i class="fas fa-balance-scale"></i> <strong>Fair Pricing Policy</strong> — real-time algorithms ensure transparent pricing.</li>
+    </ul>
+    <p class="trust-footer">
+      EVT’s mission is simple — to be a <em>platform you can believe in.</em><br>
+      <strong>Trust isn’t just our name — it’s our identity.</strong>
+    </p>
+  </div>
+</div>
+
+<!-- Image Viewer Modal (Lightbox) -->
+<div class="modal" id="imageModal" aria-hidden="true">
+  <div class="modal-content image-modal-content">
+    <span class="close-btn" onclick="closeImage()">&times;</span>
+    <div class="image-wrapper">
+      <img id="modalImage" src="" alt="Product Preview" class="full-image">
+    </div>
+    <div class="image-caption" id="imageCaption"></div>
+  </div>
+</div>
+
+
+
+  <script src="script.js"></script>
+  <footer class="footer-bottom-glow">
+  <p>© 2025 <i class="fas fa-copyright"></i> All Rights Reserved | Made with <i class="fas fa-heart"></i> by <strong>Group 12</strong></p>
+</footer>
+
+<script>
+function openDetails(title, desc, imgSrc) {
+  document.getElementById("modalTitle").textContent = title;
+  document.getElementById("modalDesc").textContent = desc;
+  document.getElementById("modalImage").src = imgSrc;
+  document.getElementById("detailsModal").style.display = "flex";
+}
+
+function closeDetails() {
+  document.getElementById("detailsModal").style.display = "none";
+}
+</script>
+<script>
+let cart = [];
+let total = 0;
+
+function addToCart(name, price) {
+  cart.push({ name, price });
+  total += price;
+  document.getElementById("cartCount").textContent = cart.length;
+  alert(`${name} added to cart!`);
+}
+
+function openCart() {
+  const modal = document.getElementById("cartModal");
+  const itemsDiv = document.getElementById("cartItems");
+  itemsDiv.innerHTML = "";
+  cart.forEach((item, i) => {
+    itemsDiv.innerHTML += `<p>${i+1}. ${item.name} - ₹${item.price}</p>`;
+  });
+  document.getElementById("cartTotal").textContent = `Total: ₹${total}`;
+  modal.style.display = "flex";
+}
+
+function closeCart() {
+  document.getElementById("cartModal").style.display = "none";
+}
+
+function checkout() {
+  document.getElementById("cartModal").style.display = "none";
+  document.getElementById("checkoutModal").style.display = "flex";
+  document.getElementById("checkoutSummary").innerHTML =
+    `You are buying <b>${cart.length}</b> item(s) for <b>₹${total}</b>`;
+}
+
+function confirmOrder() {
+  alert("🎉 Order Confirmed! Your order has been placed successfully.");
+  cart = [];
+  total = 0;
+  document.getElementById("cartCount").textContent = "0";
+  document.getElementById("checkoutModal").style.display = "none";
+}
+
+function openDetails(title, desc, imgSrc) {
+  document.getElementById("modalTitle").textContent = title;
+  document.getElementById("modalDesc").textContent = desc;
+  document.getElementById("modalImage").src = imgSrc;
+  document.getElementById("detailsModal").style.display = "flex";
+}
+
+function closeDetails() {
+  document.getElementById("detailsModal").style.display = "none";
+}
+
+function closeCheckout() {
+  document.getElementById("checkoutModal").style.display = "none";
+}
+</script>
+
+<script>
+// Safe global initialization (prevents redeclaration errors)
+window.cart = window.cart || [];
+window.total = window.total || 0;
+
+// Toggle the existing header cart sidebar (assumes your sidebar has id="cartSidebar")
+function toggleCart() {
+  const sidebar = document.getElementById("cartSidebar");
+  if (!sidebar) return alert('Cart sidebar not found (id="cartSidebar")');
+  sidebar.classList.toggle("active");
+}
+
+// Add product to cart (name: string, price: number)
+function addToCart(name, price) {
+  window.cart.push({ name, price });
+  window.total += Number(price);
+  updateCartDisplay();
+  // small confirmation - use alert or toast
+  alert(`${name} added to cart!`);
+}
+
+// Update cart UI (count, items list, total)
+function updateCartDisplay() {
+  const cartCountEl = document.getElementById("cartCount");
+  const cartItemsEl = document.getElementById("cartItems");
+  const cartTotalEl = document.getElementById("cartTotal");
+
+  if (cartCountEl) cartCountEl.textContent = window.cart.length;
+
+  if (!cartItemsEl) return;
+
+  if (window.cart.length === 0) {
+    cartItemsEl.innerHTML = `<div class="empty-cart"><i class="fas fa-box-open"></i><p>Your cart is empty</p></div>`;
+    if (cartTotalEl) cartTotalEl.textContent = "₹0";
+    return;
+  }
+
+  // render items
+  cartItemsEl.innerHTML = '';
+  window.cart.forEach((item, idx) => {
+    const itemHtml = document.createElement('div');
+    itemHtml.className = 'cart-item';
+    itemHtml.innerHTML = `
+      <div class="cart-item-details">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">₹${item.price}</div>
+      </div>
+      <button class="remove-item-btn" onclick="removeFromCart(${idx})">Remove</button>
+    `;
+    cartItemsEl.appendChild(itemHtml);
+  });
+
+  if (cartTotalEl) cartTotalEl.textContent = `₹${window.total}`;
+}
+
+// Remove item at index
+function removeFromCart(index) {
+  if (index < 0 || index >= window.cart.length) return;
+  window.total -= Number(window.cart[index].price);
+  window.cart.splice(index, 1);
+  updateCartDisplay();
+}
+
+// Checkout (simple simulated)
+function checkout() {
+  if (!window.cart || window.cart.length === 0) {
+    alert('Your cart is empty!');
+    return;
+  }
+  const amt = window.total;
+  // Simulate order
+  alert(`🎉 Order placed! Total: ₹${amt}`);
+  // reset
+  window.cart = [];
+  window.total = 0;
+  updateCartDisplay();
+  // close sidebar if present
+  const sidebar = document.getElementById("cartSidebar");
+  if (sidebar) sidebar.classList.remove('active');
+}
+
+// Product Details popup (assumes modal with ids used earlier)
+function openDetails(title, desc, imgSrc) {
+  const modal = document.getElementById("detailsModal");
+  if (!modal) return alert('Details modal not found (id="detailsModal")');
+  const titleEl = document.getElementById("modalTitle");
+  const descEl = document.getElementById("modalDesc");
+  const imgEl = document.getElementById("modalImage");
+  if (titleEl) titleEl.textContent = title;
+  if (descEl) descEl.textContent = desc;
+  if (imgEl) imgEl.src = imgSrc;
+  modal.style.display = "flex";
+}
+function closeDetails() {
+  const modal = document.getElementById("detailsModal");
+  if (!modal) return;
+  modal.style.display = "none";
+}
+
+// Initialize UI on load (safe - won't redeclare)
+document.addEventListener('DOMContentLoaded', () => {
+  // attach update to show current cart if data existed
+  updateCartDisplay();
+  // if you used a separate static cart icon earlier that duplicates navbar, hide it:
+  const floatingCart = document.querySelector('.cart-icon');
+  if (floatingCart) floatingCart.remove();
+});
+</script>
+
+</body>
+</html>
